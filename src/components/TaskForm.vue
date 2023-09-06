@@ -5,6 +5,7 @@
                 <input type="text" class="input" placeholder="Qual tarefa deseja iniciar?" v-model="description" />
             </div>
             <div class="column">
+                <!--timer-finished is an event that comes from child  -->
                 <tasktimer @timer-finished="finishTask" />
             </div>
         </div>
