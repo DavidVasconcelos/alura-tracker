@@ -18,6 +18,7 @@ import TaskTimer from './TaskTimer.vue';
 
 export default defineComponent({
     name: 'TaskForm',
+    emits: ['whenSaveTask'],
     components: {
         'tasktimer': TaskTimer
     },
@@ -28,7 +29,10 @@ export default defineComponent({
     },
     methods: {
         finishTask(timeElapsed: number): void {
-            console.log(`${this.description} -> ${timeElapsed}`);
+            this.$emit('whenSaveTask', {
+                durationInSeconds: timeElapsed,
+                description: this.description
+            })
             this.description = '';
         }
     },

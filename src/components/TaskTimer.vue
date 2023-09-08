@@ -2,8 +2,7 @@
     <div class="is-flex is-align-items-center is-justify-content-space-between">
         <stopwatch :timeInSeconds="timeInSeconds" />
         <timerbutton @clicked='initTimer' buttonIcon="fas fa-play" buttonText='play' :isDisabled="isTimerRunnig"/>
-        <timerbutton @clicked='finishTimer' buttonIcon="fas fa-stop" buttonText='stop' :isDisabled="!isTimerRunnig"/>
-        
+        <timerbutton @clicked='finishTimer' buttonIcon="fas fa-stop" buttonText='stop' :isDisabled="!isTimerRunnig"/>        
     </div>
 </template>
 
