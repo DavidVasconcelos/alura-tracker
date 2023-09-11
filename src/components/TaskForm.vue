@@ -6,7 +6,7 @@
             </div>
             <div class="column">
                 <!--timer-finished is an event that comes from child  -->
-                <tasktimer @timer-finished="finishTask" />
+                <tasktimer @timer-finished="finishTask" @clean-tasks="cleanTasks" />
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@ import TaskTimer from './TaskTimer.vue';
 
 export default defineComponent({
     name: 'TaskForm',
-    emits: ['whenSaveTask'],
+    emits: ['whenSaveTask', 'whenCleanTasks'],
     components: {
         'tasktimer': TaskTimer
     },
@@ -32,8 +32,11 @@ export default defineComponent({
             this.$emit('whenSaveTask', {
                 durationInSeconds: timeElapsed,
                 description: this.description
-            })
+            });
             this.description = '';
+        },
+        cleanTasks(): void {
+            this.$emit('whenCleanTasks')
         }
     },
 })

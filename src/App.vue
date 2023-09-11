@@ -5,7 +5,7 @@
     </div>
     <div class="column is-three-quarter content">
       <!--whenSaveTask is an event that comes from child  -->
-      <taskform @whenSaveTask="saveTask" />
+      <taskform @whenSaveTask="saveTask" @whenCleanTasks="cleanTasks" />
       <div class="list">
         <!-- list of tasks, alaways item first, list index in second -->
         <tasklist v-for="(task, index) in tasks" :key="index" :task="task" />
@@ -46,6 +46,9 @@ export default defineComponent({
   methods: {
     saveTask(task: ITask) {
       this.tasks.push(task);
+    },
+    cleanTasks(): void {
+      this.tasks = [];
     }
   },
 });
