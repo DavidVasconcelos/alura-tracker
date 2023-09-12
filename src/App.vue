@@ -1,9 +1,9 @@
 <template>
-  <main class="columns is-gapless is-multiline">
-    <div class="column is-one-quarter">
-      <sidebar />
+  <main class="columns is-gapless is-multiline" :class="{ 'dark-mode': isDarkModeActive }">
+    <div class="column is-one-fifth">
+      <sidebar @toThemeChanged="changeTheme" />
     </div>
-    <div class="column is-three-quarter content">
+    <div class="column is-four-fifths content">
       <!--whenSaveTask is an event that comes from child  -->
       <taskform @whenSaveTask="saveTask" @whenCleanTasks="cleanTasks" />
       <div class="list">
@@ -40,7 +40,8 @@ export default defineComponent({
   },
   data() {
     return {
-      tasks: [] as ITask[]
+      tasks: [] as ITask[],
+      isDarkModeActive: false
     }
   },
   methods: {
@@ -49,6 +50,9 @@ export default defineComponent({
     },
     cleanTasks(): void {
       this.tasks = [];
+    },
+    changeTheme(isDarkModeActive: boolean): void {
+      this.isDarkModeActive = isDarkModeActive;
     }
   },
 });
