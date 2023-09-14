@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="timer">
         <strong class="display">{{ timeElapsed }}</strong>
     </section>
 </template>
@@ -26,5 +26,11 @@ export default defineComponent({
 <style scoped>
 .display {
     color: var(--text-primary);
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.timer {
+    display: table;
 }
 </style>

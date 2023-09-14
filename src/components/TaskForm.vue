@@ -1,7 +1,7 @@
 <template>
     <div class="box task-form">
         <div class="columns">
-            <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
+            <div class="column is-three-quarters" role="form" aria-label="Formulário para criação de uma nova tarefa">
                 <input type="text" class="input" placeholder="Qual tarefa deseja iniciar?" v-model="description" />
             </div>
             <div class="column">
