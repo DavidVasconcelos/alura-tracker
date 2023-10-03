@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 <template>
     <section class="projects">
         <h1 class="title">Projetos</h1>
@@ -34,29 +34,29 @@ import { defineComponent } from 'vue';
 </template>
 
 <script lang="ts">
-import IProject from '../interfaces/IProject';
-import { defineComponent } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
+import { defineComponent, computed } from 'vue';
+import { useStore } from '../store/index';
 
 export default defineComponent({
     name: 'ProjectsView',
     data() {
         return {
-            projectName: "",
-            projects: [] as IProject[]
-
+            projectName: ""
         };
     },
     methods: {
         save() {
-            const project: IProject = {
-                name: this.projectName,
-                id: uuidv4()
-            }
-            this.projects.push(project);
+            this.store.commit('ADD_PROJECT', this.projectName)
             this.projectName = '';
         }
     },
+    setup() {
+        const store = useStore()
+        return {
+            store,
+            projects: computed(() => store.state.projects)
+        }
+    }
 })
 </script>
 
