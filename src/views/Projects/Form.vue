@@ -1,7 +1,6 @@
 import { defineComponent, computed } from 'vue';
 <template>
-    <section class="projects">
-        <h1 class="title">Projetos</h1>
+    <section>
         <!-- prevent deafault behavior -->
         <form @submit.prevent="save">
             <div class="field">
@@ -63,10 +62,3 @@ export default defineComponent({
     }
 })
 </script>
-
-<style scoped>
-.projects {
-    padding: 1.25rem;
-}
-</style>
-
