@@ -24,6 +24,11 @@ import { defineComponent, computed } from 'vue';
                                 <i class="fas fa-pencil-alt"></i>
                             </span>
                         </router-link>
+                        <button class="button ml-2 is-danger" @click="deleteProject(project.id)">
+                            <span class="icon is-small">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -33,14 +38,21 @@ import { defineComponent, computed } from 'vue';
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import { useStore } from '../../store/index';
+import { useStore } from '@/store';
+import { ProjectMutationType } from '@/store/ProjectMutationType';
 
 export default defineComponent({
     name: 'ListView',
+    methods: {
+        deleteProject(id: string) {
+            this.store.commit(ProjectMutationType.DELETE_PROJECT, id);
+        }
+    },
     setup() {
         const store = useStore()
         return {
-            projects: computed(() => store.state.projects)
+            projects: computed(() => store.state.projects),
+            store
         }
     }
 })
