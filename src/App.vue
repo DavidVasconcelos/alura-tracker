@@ -4,6 +4,7 @@
       <sidebar @toThemeChanged="changeTheme" />
     </div>
     <div class="column is-four-fifths content">
+      <user-notification />
       <!-- view -->
       <router-view></router-view>
     </div>
@@ -13,11 +14,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SideBar from './components/SideBar.vue';
+import UserNotification from './components/UserNotification.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    'sidebar': SideBar
+    'sidebar': SideBar,
+    UserNotification
   },
   data() {
     return {

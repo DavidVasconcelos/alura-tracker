@@ -3,16 +3,38 @@ import { Store, createStore, useStore as vuexUseStore } from "vuex";
 import { v4 as uuidv4 } from 'uuid';
 import { InjectionKey } from "vue";
 import { ProjectMutationType } from "./ProjectMutationType";
+import { INotification, NotificationType } from "@/interfaces/INotification";
 
 interface State {
-    projects: IProject[];
+    projects: IProject[],
+    notifications: INotification[];
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
     state: {
-        projects: []        
+        projects: [],
+        notifications: [
+            {
+                id: 1,
+                text: 'Uma notificação de sucesso',
+                title: 'sucesso',
+                type: NotificationType.SUCCESS
+            },
+            {
+                id: 2,
+                text: 'Uma notificação de atencao',
+                title: 'atencao',
+                type: NotificationType.WARNING
+            },
+            {
+                id: 3,
+                text: 'Uma notificação de falha',
+                title: 'falha',
+                type: NotificationType.DANGER
+            }        
+        ]      
     },
     mutations: {
         [ProjectMutationType.ADD_PROJECT](state, projectName: string) {
