@@ -21,8 +21,9 @@ import { defineComponent, computed } from 'vue';
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
-import { NOTIFY, ProjectMutationType } from '@/store/MutationType';
+import { ProjectMutationType } from '@/store/MutationType';
 import { NotificationType } from '@/interfaces/INotification';
+import { notificationMixin } from '../../mixins/notify';
 
 
 export default defineComponent({
@@ -32,6 +33,7 @@ export default defineComponent({
             type: String
         }
     },
+    mixins: [notificationMixin],
     mounted() {
         if (this.id) {
             const project = this.store.state.projects.find(p => p.id == this.id);
@@ -54,11 +56,7 @@ export default defineComponent({
                 this.store.commit(ProjectMutationType.ADD_PROJECT, this.projectName);
             }
             this.projectName = '';
-            this.store.commit(NOTIFY, {
-                title: 'Novo projeto foi salvo',
-                text: 'Seu projeto já está disponível',
-                type: NotificationType.SUCCESS
-            });
+            this.notify(NotificationType.SUCCESS, 'Excelente!', 'O projeto foi cadastrado com sucesso!');
             this.$router.push('/projects');
         }
     },

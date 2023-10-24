@@ -26,8 +26,8 @@
 import { computed, defineComponent } from 'vue';
 import TaskTimer from './TaskTimer.vue';
 import { useStore } from '../store/index';
-import { NOTIFY } from '@/store/MutationType';
 import { NotificationType } from '@/interfaces/INotification';
+import { notificationMixin } from '@/mixins/notify';
 
 export default defineComponent({
     name: 'TaskForm',
@@ -35,6 +35,7 @@ export default defineComponent({
     components: {
         'tasktimer': TaskTimer
     },
+    mixins: [notificationMixin],
     data() {
         return {
             description: '',
@@ -45,11 +46,7 @@ export default defineComponent({
         finishTask(timeElapsed: number): void {
             const project = this.projects.find((p) => p.id == this.projectId);
             if (!project) {
-                this.store.commit(NOTIFY, {
-                    title: 'Ops!',
-                    text: 'Selecione um projeto antes de finalizar a tarefa',
-                    type: NotificationType.DANGER
-                });
+                this.notify(NotificationType.DANGER, 'Ops!', 'Selecione um projeto antes de finalizar a tarefa!');
                 return;
             }
             this.$emit('whenSaveTask', {
