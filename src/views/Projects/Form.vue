@@ -23,8 +23,7 @@ import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { ProjectMutationType } from '@/store/MutationType';
 import { NotificationType } from '@/interfaces/INotification';
-import { notificationMixin } from '../../mixins/notify';
-
+import useNotifier from '@/hooks/notifier';
 
 export default defineComponent({
     name: 'FormView',
@@ -33,7 +32,6 @@ export default defineComponent({
             type: String
         }
     },
-    mixins: [notificationMixin],
     mounted() {
         if (this.id) {
             const project = this.store.state.projects.find(p => p.id == this.id);
@@ -61,9 +59,11 @@ export default defineComponent({
         }
     },
     setup() {
-        const store = useStore()
+        const store = useStore();
+        const { notify } = useNotifier();
         return {
-            store
+            store,
+            notify
         }
     }
 })

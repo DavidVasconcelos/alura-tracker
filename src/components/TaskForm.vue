@@ -27,7 +27,7 @@ import { computed, defineComponent } from 'vue';
 import TaskTimer from './TaskTimer.vue';
 import { useStore } from '../store/index';
 import { NotificationType } from '@/interfaces/INotification';
-import { notificationMixin } from '@/mixins/notify';
+import useNotifier from '@/hooks/notifier';
 
 export default defineComponent({
     name: 'TaskForm',
@@ -35,7 +35,6 @@ export default defineComponent({
     components: {
         'tasktimer': TaskTimer
     },
-    mixins: [notificationMixin],
     data() {
         return {
             description: '',
@@ -62,10 +61,12 @@ export default defineComponent({
     },
     setup() {
         const store = useStore();
+        const { notify } = useNotifier();
         return {
             store,
             // computed because is dynamic
-            projects: computed(() => store.state.projects)
+            projects: computed(() => store.state.projects),
+            notify
         }
     }
 })
