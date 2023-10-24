@@ -26,6 +26,8 @@
 import { computed, defineComponent } from 'vue';
 import TaskTimer from './TaskTimer.vue';
 import { useStore } from '../store/index';
+import { NOTIFY } from '@/store/MutationType';
+import { NotificationType } from '@/interfaces/INotification';
 
 export default defineComponent({
     name: 'TaskForm',
@@ -41,6 +43,15 @@ export default defineComponent({
     },
     methods: {
         finishTask(timeElapsed: number): void {
+            const project = this.projects.find((p) => p.id == this.projectId);
+            if (!project) {
+                this.store.commit(NOTIFY, {
+                    title: 'Ops!',
+                    text: 'Selecione um projeto antes de finalizar a tarefa',
+                    type: NotificationType.DANGER
+                });
+                return;
+            }
             this.$emit('whenSaveTask', {
                 durationInSeconds: timeElapsed,
                 description: this.description,
@@ -55,7 +66,8 @@ export default defineComponent({
     setup() {
         const store = useStore();
         return {
-            // computed bacause is dynamic
+            store,
+            // computed because is dynamic
             projects: computed(() => store.state.projects)
         }
     }
