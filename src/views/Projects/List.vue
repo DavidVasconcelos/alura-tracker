@@ -39,7 +39,7 @@ import { defineComponent, computed } from 'vue';
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useStore } from '@/store';
-import { ProjectMutationType } from '@/store/ProjectMutationType';
+import { ProjectMutationType } from '@/store/MutationType';
 
 export default defineComponent({
     name: 'ListView',

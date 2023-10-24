@@ -21,7 +21,8 @@ import { defineComponent, computed } from 'vue';
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
-import { ProjectMutationType } from '@/store/ProjectMutationType';
+import { NOTIFY, ProjectMutationType } from '@/store/MutationType';
+import { NotificationType } from '@/interfaces/INotification';
 
 
 export default defineComponent({
@@ -53,6 +54,11 @@ export default defineComponent({
                 this.store.commit(ProjectMutationType.ADD_PROJECT, this.projectName);
             }
             this.projectName = '';
+            this.store.commit(NOTIFY, {
+                title: 'Novo projeto foi salvo',
+                text: 'Seu projeto já está disponível',
+                type: NotificationType.SUCCESS
+            });
             this.$router.push('/projects');
         }
     },

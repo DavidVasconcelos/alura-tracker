@@ -3,3 +3,5 @@ export const enum ProjectMutationType {
   EDIT_PROJECT = 'EDIT',
   DELETE_PROJECT = 'DELETE'
 }
+
+export const NOTIFY = 'NOTIFY';
