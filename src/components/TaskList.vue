@@ -1,7 +1,8 @@
 <template>
     <taskbox>
         <div class="columns">
-            <div class="column is-7">{{ task.description || 'Tarefa sem descrição' }}</div>
+            <div class="column is-4">{{ task.description || 'Tarefa sem descrição' }}</div>
+            <div class="column is-3"> {{ task.project?.name || 'N/D' }}</div>
             <!-- : -> link with variable -->
             <div class="column">
                 <stopwatch :timeInSeconds="task.durationInSeconds" />
